@@ -9,11 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        // Its clear that the type of 'emoji' is an array of strings
+        // It can be written as: let emojis: [String] = ...
+        // It's identical
+        // Swift programmers use the square bracket notation
+        let emojis: Array<String> = ["💀","👹","😱","😎"]
         VStack {
-            Cardview()
-            Cardview()
-            Cardview()
-            Cardview()
+            // To reach into an array and render an object for each element in an array
+            // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
+            ForEach(emojis.indices, id: \.self) { index in
+                Cardview(content: emojis[index])
+            }
         }
         .foregroundColor(.orange)
         .padding()
@@ -25,12 +31,13 @@ struct Cardview: View {
     // Setting @State before the var causes it to create a pointer to isFaceUp
     // Since a view is immutable by default, this allows values in a view to be changed
     // because the pointer isn't changing, the value it is pointing at is.
-    @State var isFaceUp = false
+    @State var isFaceUp = true
     // Default value is set to prevent providing a value
     // every single time.
     // If a let is used, the user can only set it once
     // Otherwise it can be swapped
     // Always start off with it being immutable
+    let content: String
     
     var body: some View {
         ZStack{
@@ -39,13 +46,13 @@ struct Cardview: View {
             if isFaceUp {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2)
-                Text("😭").font(.largeTitle)
+                Text(content).font(.largeTitle)
             } else {
                 base.fill()
             }
         }
         .onTapGesture {
-            //isFaceUp = !isFaceUp
+            // isFaceUp = !isFaceUp
             // this throws and error cause views are immutable
             // The idiomatic Swift way to change this would be to use .toggle()
             isFaceUp.toggle()
