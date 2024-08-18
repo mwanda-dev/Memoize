@@ -10,9 +10,9 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Cardview(isFaceUp: true)
             Cardview()
-            Cardview(isFaceUp: true)
+            Cardview()
+            Cardview()
             Cardview()
         }
         .foregroundColor(.orange)
@@ -25,7 +25,7 @@ struct Cardview: View {
     // Setting @State before the var causes it to create a pointer to isFaceUp
     // Since a view is immutable by default, this allows values in a view to be changed
     // because the pointer isn't changing, the value it is pointing at is.
-    @State var isFaceUp: Bool = false
+    @State var isFaceUp = false
     // Default value is set to prevent providing a value
     // every single time.
     // If a let is used, the user can only set it once
@@ -39,7 +39,7 @@ struct Cardview: View {
             if isFaceUp {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2)
-                Text("💀").font(.largeTitle)
+                Text("😭").font(.largeTitle)
             } else {
                 base.fill()
             }
