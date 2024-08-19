@@ -17,41 +17,53 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            VStack {
-                    // To reach into an array and render an object for each element in an array
-                    // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
-                    // We have changed it to have a range from the first element to the end of the card count
-                    //element
-                ForEach(0..<cardCount, id: \.self) { index in
-                    Cardview(content: emojis[index])
-                }
-            }
-            .foregroundColor(.orange)
-            
-            HStack {
-                Button(action: {
-                    if cardCount > 1 {
-                        cardCount -= 1
-                    }
-                }, label: {
-                    Image(systemName: "rectangle.stack.badge.minus")
-                })
-                
-                Spacer()
-                
-                Button(action: {
-                    if cardCount < emojis.count {
-                        cardCount += 1
-                    }
-                }, label: {
-                    Image(systemName: "rectangle.stack.badge.plus")
-                })
-                
-            }
-            .font(.largeTitle)
-            .imageScale(.large)
+            cards
+            cardCountAdjusters
         }
         .padding()
+    }
+    
+    var cardCountAdjusters: some View {
+        HStack {
+            cardRemover
+            Spacer()
+            cardAdder
+        }
+        .font(.largeTitle)
+        .imageScale(.large)
+    }
+    
+    var cardRemover: some View {
+        Button(action: {
+            if cardCount > 1 {
+                cardCount -= 1
+            }
+        }, label: {
+            Image(systemName: "rectangle.stack.badge.minus")
+        })
+    }
+    
+    var cardAdder: some View {
+        Button(action: {
+            if cardCount < emojis.count {
+                cardCount += 1
+            }
+        }, label: {
+            Image(systemName: "rectangle.stack.badge.plus")
+        })
+    }
+    
+    var cards: some View {
+        VStack {
+                // To reach into an array and render an object for each element in an array
+                // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
+                // We have changed it to have a range from the first element to the end of the card count
+                //element
+            ForEach(0..<cardCount, id: \.self) { index in
+                Cardview(content: emojis[index])
+            }
+            .foregroundColor(.orange)
+        }
     }
 }
 
