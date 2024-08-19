@@ -8,20 +8,45 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Its clear that the type of 'emoji' is an array of strings
+    // It can be written as: let emojis: [String] = ...
+    // It's identical
+    // Swift programmers use the square bracket notation
+    let emojis: Array<String> = ["💀","👹","😱","😎","🗣️","☹️","🥭","😏","👽","🤡"]
+    @State var cardCount: Int = 4
+    
     var body: some View {
-        // Its clear that the type of 'emoji' is an array of strings
-        // It can be written as: let emojis: [String] = ...
-        // It's identical
-        // Swift programmers use the square bracket notation
-        let emojis: Array<String> = ["💀","👹","😱","😎"]
         VStack {
-            // To reach into an array and render an object for each element in an array
-            // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
-            ForEach(emojis.indices, id: \.self) { index in
-                Cardview(content: emojis[index])
+            VStack {
+                    // To reach into an array and render an object for each element in an array
+                    // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
+                    // We have changed it to have a range from the first element to the end of the card count
+                    //element
+                ForEach(0..<cardCount, id: \.self) { index in
+                    Cardview(content: emojis[index])
+                }
             }
+            .foregroundColor(.orange)
+            
+            HStack {
+                Button(action: {
+                  cardCount -= 1
+                }, label: {
+                    Image(systemName: "rectangle.stack.badge.minus")
+                })
+                
+                Spacer()
+                
+                Button(action: {
+                  cardCount += 1
+                }, label: {
+                    Image(systemName: "rectangle.stack.badge.plus")
+                })
+                
+            }
+            .font(.largeTitle)
+            .imageScale(.large)
         }
-        .foregroundColor(.orange)
         .padding()
     }
 }
@@ -31,7 +56,7 @@ struct Cardview: View {
     // Setting @State before the var causes it to create a pointer to isFaceUp
     // Since a view is immutable by default, this allows values in a view to be changed
     // because the pointer isn't changing, the value it is pointing at is.
-    @State var isFaceUp = true
+    @State var isFaceUp = false
     // Default value is set to prevent providing a value
     // every single time.
     // If a let is used, the user can only set it once
