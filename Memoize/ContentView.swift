@@ -12,12 +12,13 @@ struct ContentView: View {
     // It can be written as: let emojis: [String] = ...
     // It's identical
     // Swift programmers use the square bracket notation
-    let emojis: Array<String> = ["💀","👹","😱","😎","🗣️","☹️","🥭","😏","👽","🤡"]
+    let emojis: Array<String> = ["💀","👹","😱","😎","🗣️","☹️","🥭","😏","👽","🤡","😭"]
     @State var cardCount: Int = 4
     
     var body: some View {
         VStack {
             cards
+            Spacer()
             cardCountAdjusters
         }
         .padding()
@@ -57,7 +58,7 @@ struct ContentView: View {
     }
     
     var cards: some View {
-        VStack {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))])  {
                 // To reach into an array and render an object for each element in an array
                 // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
                 // We have changed it to have a range from the first element to the end of the card count
@@ -103,19 +104,6 @@ struct Cardview: View {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #Preview {
     ContentView()
