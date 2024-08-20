@@ -88,13 +88,17 @@ struct Cardview: View {
         ZStack{
             // Type inference used here, don't have to write Rounded Rectangle twice
             let base = RoundedRectangle(cornerRadius: 12)
-            if isFaceUp {
+            // The issue with the if, is the background wasn't rendered because of the branches in the conditional
+            // In this group, the background fill is there from the start, here we just make the
+            // emojis transparent
+            Group {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2)
                 Text(content).font(.largeTitle)
-            } else {
-                base.fill()
             }
+            .opacity(isFaceUp ? 1 : 0)
+            base.fill().opacity(isFaceUp ? 0 : 1)
+            
         }
         .onTapGesture {
             // isFaceUp = !isFaceUp
