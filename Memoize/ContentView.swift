@@ -68,7 +68,7 @@ struct ContentView: View {
                 //element
             ForEach(0..<cardCount, id: \.self) { index in
                 Cardview(content: emojis[index])
-                    .aspectRatio(2/3, contentMode: .fit)
+                    .aspectRatio(10/16, contentMode: .fit)
             }
             .foregroundColor(.orange)
         }
