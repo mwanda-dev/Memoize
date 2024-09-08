@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		615075DD2C8E505A00FC756D /* MemoGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615075DC2C8E505A00FC756D /* MemoGame.swift */; };
+		615075DF2C8E522B00FC756D /* EmojiMemoizeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615075DE2C8E522B00FC756D /* EmojiMemoizeGame.swift */; };
 		617592E52C5D1B0D001F86C5 /* MemoizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617592E42C5D1B0D001F86C5 /* MemoizeApp.swift */; };
 		617592E72C5D1B0D001F86C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617592E62C5D1B0D001F86C5 /* ContentView.swift */; };
 		617592E92C5D1B0F001F86C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 617592E82C5D1B0F001F86C5 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		615075DC2C8E505A00FC756D /* MemoGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGame.swift; sourceTree = "<group>"; };
+		615075DE2C8E522B00FC756D /* EmojiMemoizeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoizeGame.swift; sourceTree = "<group>"; };
 		617592E12C5D1B0D001F86C5 /* Memoize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memoize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		617592E42C5D1B0D001F86C5 /* MemoizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoizeApp.swift; sourceTree = "<group>"; };
 		617592E62C5D1B0D001F86C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +57,8 @@
 			children = (
 				617592E42C5D1B0D001F86C5 /* MemoizeApp.swift */,
 				617592E62C5D1B0D001F86C5 /* ContentView.swift */,
+				615075DC2C8E505A00FC756D /* MemoGame.swift */,
+				615075DE2C8E522B00FC756D /* EmojiMemoizeGame.swift */,
 				617592E82C5D1B0F001F86C5 /* Assets.xcassets */,
 				617592EA2C5D1B0F001F86C5 /* Preview Content */,
 			);
@@ -138,7 +144,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				617592E72C5D1B0D001F86C5 /* ContentView.swift in Sources */,
+				615075DF2C8E522B00FC756D /* EmojiMemoizeGame.swift in Sources */,
 				617592E52C5D1B0D001F86C5 /* MemoizeApp.swift in Sources */,
+				615075DD2C8E505A00FC756D /* MemoGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

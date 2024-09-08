@@ -13,51 +13,13 @@ struct ContentView: View {
     // It's identical
     // Swift programmers use the square bracket notation
     let emojis: Array<String> = ["💀","👹","😱","😎","🗣️","☹️","🥭","😏","👽","🤡","😭"]
-    @State var cardCount: Int = 4
     
     var body: some View {
-        VStack {
-            // Elements within this are scrollable
-            ScrollView {
-                cards
-            }
-            Spacer()
-            cardCountAdjusters
+        // Elements within this are scrollable
+        ScrollView {
+            cards
         }
         .padding()
-    }
-    
-    var cardCountAdjusters: some View {
-        HStack {
-            cardRemover
-            Spacer()
-            cardAdder
-        }
-        .font(.largeTitle)
-        .imageScale(.large)
-    }
-    
-    // Internal vs external parameter names
-    // When we pass in an argument to a constructor of something, we have to say system name calling
-    // For symbol the first arg with a 'by' is an external name while just offset is internal to the function
-    // symbol is both the internal and external name which is used by both the caller and implementor
-    func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
-        Button(action: {
-            // Here 'offset' is used, not by offset
-            // The caller will use 'by offset'
-            cardCount += offset
-        }, label: {
-            Image(systemName: symbol)
-        })
-        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
-    }
-    
-    var cardRemover: some View {
-        cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus")
-    }
-    
-    var cardAdder: some View {
-        cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus")
     }
     
     var cards: some View {
@@ -66,7 +28,7 @@ struct ContentView: View {
                 // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
                 // We have changed it to have a range from the first element to the end of the card count
                 //element
-            ForEach(0..<cardCount, id: \.self) { index in
+            ForEach(emojis.indices, id: \.self) { index in
                 Cardview(content: emojis[index])
                     .aspectRatio(10/16, contentMode: .fit)
             }
