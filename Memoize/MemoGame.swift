@@ -8,17 +8,35 @@
 import Foundation
 
 struct MemoGame<CardContent> {
-    var cards: Array<Card>
+    // Allows looking at the variable from outside, but not modifying it
+    private(set) var cards: Array<Card>
     
-    func choose(card: Card) {
+    init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
+        cards = []
+        // can also say 'cards = Array<Card>()' or 'cards = [Card]()'
+        
+        // add number of pairs of cards * 2 cards to the array
+        
+        for pairIndex in 0..<max(2, numberOfPairsOfCards) {
+            let content = cardContentFactory(pairIndex)
+            cards.append(Card(content: content))
+            cards.append(Card(content: content))
+        }
+    }
+    
+    func choose(_ card: Card) {
         
     }
     
+    mutating func shuffle() {
+        cards.shuffle()
+        print(cards)
+    }
+    
     struct Card {
-        var isFaceUp: Bool
-        var isMatched: Bool
-        var content: CardContent
-        
+        var isFaceUp = true
+        var isMatched = false
+        let content: CardContent
     }
 }
 
