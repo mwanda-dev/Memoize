@@ -17,7 +17,7 @@ struct MemoGame<CardContent> {
         
         // add number of pairs of cards * 2 cards to the array
         
-        for pairIndex in 0..<max(2, numberOfPairsOfCards) {
+for pairIndex in 0..<max(2, numberOfPairsOfCards) {
             let content = cardContentFactory(pairIndex)
             cards.append(Card(content: content))
             cards.append(Card(content: content))

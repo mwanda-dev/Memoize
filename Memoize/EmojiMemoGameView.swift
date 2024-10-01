@@ -30,10 +30,10 @@ struct EmojiMemoGameView: View {
     
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), spacing: 0)], spacing: 0)  {
-                // To reach into an array and render an object for each element in an array
-                // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
-                // We have changed it to have a range from the first element to the end of the card count
-                //element
+            // To reach into an array and render an object for each element in an array
+            // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
+            // We have changed it to have a range from the first element to the end of the card count
+            // element
             ForEach(viewModel.cards.indices, id: \.self) { index in
                 Cardview(viewModel.cards[index])
                     .aspectRatio(10/16, contentMode: .fit)
