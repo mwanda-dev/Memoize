@@ -12,7 +12,6 @@ import SwiftUI
 class EmojiMemoizeGame: ObservableObject {
     private static let emojis = ["💀","👹","😱","😎","🗣️","☹️","🥭","😏","👽","🤡","😭","🤣","🍭","🥺","🥶","🤬","🍆", "🍌","🫦","🍑"]
     
-    
     // We don't wqant any one creating a memory game so this is private
     private static func createMemoryGame() -> MemoGame<String> {
         return MemoGame(numberOfPairsOfCards: 20) { pairIndex in

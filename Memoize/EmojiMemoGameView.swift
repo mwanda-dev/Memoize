@@ -13,6 +13,10 @@ struct EmojiMemoGameView: View {
     // It's identical
     // Swift programmers use the square bracket notation
     @ObservedObject var viewModel: EmojiMemoizeGame
+    // The real difference between an @State object vs an @ObservedObject is the lifetimes of the variables involved.
+    // @State in a view is gonna cause a variable to come into existence as soon as the view is displayed, but it it taken away as soon as the view is taken away.
+    // @ObservedObject causes the lifetime to come from somewhere else, where it is passed in from.
+    //
     // Don't call it a viewModel in production
     
     var body: some View {
@@ -20,6 +24,10 @@ struct EmojiMemoGameView: View {
             // Elements within this are scrollable
             ScrollView {
                 cards
+                    // .animation(.default, value: viewModel.cards)
+                    // This code requires that 'MemoGame<String>.Card' conforms to 'Equatable,' which is a protocol a.k.a. an interface that animation uses in this case
+                    .animation(.default, value: viewModel.cards)
+                    // They just faded in and out 😭🙏🏾
             }
             Button("Shuffle") {
                 viewModel.shuffle()
@@ -30,12 +38,13 @@ struct EmojiMemoGameView: View {
     
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), spacing: 0)], spacing: 0)  {
-            // To reach into an array and render an object for each element in an array
-            // 'emojis.indices' gives a range of all the elements in it to avoid hard coding it
-            // We have changed it to have a range from the first element to the end of the card count
-            // element
-            ForEach(viewModel.cards.indices, id: \.self) { index in
-                Cardview(viewModel.cards[index])
+            ForEach(viewModel.cards) { card in
+                // This affects our animation due to it still showing the card at a certain index even if it changed. So the animation fades in and out instead of moving around here.
+                // Another issue... the Generic Struct 'ForEach' wants 'MemoGame<String>.Card' to conform to 'Hashable' for it to do this
+                // Dictionaries don't allow duplicate values, so we need another way to uniquely identify the cards rendered.
+                // Since we have removed the 'id: \.self,' we now need the 'MemoGame<String>.Card' to conform to 'Identifiable'
+                Cardview(card)
+                // passing the card instead of the index here
                     .aspectRatio(10/16, contentMode: .fit)
                     .padding(5)
             }
@@ -87,3 +96,6 @@ struct Cardview: View {
 #Preview {
     EmojiMemoGameView(viewModel: EmojiMemoizeGame())
 }
+// The preview is getting recreated every time we touch our code. That's why the cards get reset everytime.
+// This closure creates a new View everytime so we wouldn't want something like this in our app to cause leaks.
+//
