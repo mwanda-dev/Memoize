@@ -26,7 +26,32 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
         }
     }
     
-    var indexOfTheOneAndOnlyFaceUpCard: Int?
+    var indexOfTheOneAndOnlyFaceUpCard: Int? {
+        get {
+            var faceUpCardIndices: [Int] = []
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    faceUpCardIndices.append(index)
+                }
+            }
+            
+            if faceUpCardIndices.count == 1 {
+                return faceUpCardIndices.first
+            } else {
+                return nil
+            }
+        }
+        
+        set {
+            for index in cards.indices {
+                if index == newValue {
+                    cards[index].isFaceUp = true
+                } else {
+                    cards[index].isFaceUp = false
+                }
+            }
+        }
+    }
     
     mutating func choose(_ card: Card) {
        print("Chosen card: \(card)")
@@ -44,11 +69,7 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
                        cards[potentialMatchIndex].isMatched = true
                        cards[chosenIndex].isMatched = true
                    }
-                   indexOfTheOneAndOnlyFaceUpCard = nil
                } else {
-                   for index in cards.indices {
-                       cards[index].isFaceUp = false
-                   }
                    indexOfTheOneAndOnlyFaceUpCard = chosenIndex
                }
                cards[chosenIndex].isFaceUp = true
