@@ -62,7 +62,6 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
         var debugDescription: String {
             "\(id): \(content) \(isFaceUp ? "up" : "down")\(isMatched ? " matched" : "")"
         }
-        // Last Time stamp on Youtube video: 23:50
     }
 }
 
