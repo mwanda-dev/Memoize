@@ -52,7 +52,7 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
                    indexOfTheOneAndOnlyFaceUpCard = chosenIndex
                }
                cards[chosenIndex].isFaceUp = true
-            }                           // This is out main game logic, kinda obvious if you read it
+            }           // This is our main game logic, kinda obvious if you read it
         } // We don't do anything if there's no index here
         // The only issue with this code is that the matched cards don't disappear from the view...
     }
