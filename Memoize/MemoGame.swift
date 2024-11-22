@@ -26,14 +26,10 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
         }
     }
     
+    // Now we have much more readable code 🥰
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
-        get {
-            return faceUpCardIndices = cards.indices.filter { index in cards[index].isFaceUp }.only
-        }
-        
-        set {
-            cards.indices.forEach { cards[$0].isFaceUp = (newValue == $0) }
-        }
+        get { cards.indices.filter { index in cards[index].isFaceUp }.only }
+        set { cards.indices.forEach { cards[$0].isFaceUp = (newValue == $0) } }
     }
     
     mutating func choose(_ card: Card) {
