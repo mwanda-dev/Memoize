@@ -26,11 +26,35 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
         }
     }
     
-   mutating func choose(_ card: Card) {
+    var indexOfTheOneAndOnlyFaceUpCard: Int?
+    
+    mutating func choose(_ card: Card) {
        print("Chosen card: \(card)")
        // The card var is a value type, not a reference, so directly flipping the card doesn't work
-       let chosenIndex = index(of: card)
-       cards[chosenIndex].isFaceUp.toggle()
+       // We don't use the index method we wrote by using built in array functions
+           // Trailing closure syntax might be confusable with the body of the statement, so passing it as a parenthesized argument is better
+       if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }) {
+                   // Always get rid of any warnings
+           // Here we use an optional to check the index of the card incase it doesn't have an index
+           
+           // You can flip cards over only face up:
+           if !cards[chosenIndex].isFaceUp && !cards[chosenIndex].isMatched {
+               if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
+                   if cards[potentialMatchIndex].content == cards[chosenIndex].content {
+                       cards[potentialMatchIndex].isMatched = true
+                       cards[chosenIndex].isMatched = true
+                   }
+                   indexOfTheOneAndOnlyFaceUpCard = nil
+               } else {
+                   for index in cards.indices {
+                       cards[index].isFaceUp = false
+                   }
+                   indexOfTheOneAndOnlyFaceUpCard = chosenIndex
+               }
+               cards[chosenIndex].isFaceUp = true
+            }                           // This is out main game logic, kinda obvious if you read it
+        } // We don't do anything if there's no index here
+        // The only issue with this code is that the matched cards don't disappear from the view...
     }
     
     mutating func shuffle() {
@@ -38,16 +62,15 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
         print(cards)
     }
     
-    func index(of card: Card) -> Int {
-        for index in cards.indices {
-            if cards[index].id == card.id {
-                return index
-            }
-        }
-        
-        return 0 // FIXME: Bogus!!!
-        
-    }
+            // Here we're not sure whether a given card will have an index
+            // private func index(of card: Card) -> Optional<Int> {
+                // for index in cards.indices {
+                    // if cards[index].id == card.id {
+                    //     return index
+                  //   }
+                // }
+              //   return nil
+            // }
     
     // Just saying struct Card: Equatable doesn't mean that it will just become Equatable
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
@@ -68,7 +91,7 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
         // All the vars are equatable, so it can derive an equatable for the whole thing.
         
         // This should be equatable to use the animation
-        var isFaceUp = true
+        var isFaceUp = false
         var isMatched = false
         let content: CardContent
         var id: String

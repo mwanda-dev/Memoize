@@ -56,7 +56,6 @@ struct EmojiMemoGameView: View {
     }
 }
 
-
 struct Cardview: View {
     let card: MemoGame<String>.Card
 
@@ -101,4 +100,3 @@ struct Cardview: View {
 }
 // The preview is getting recreated every time we touch our code. That's why the cards get reset everytime.
 // This closure creates a new View everytime so we wouldn't want something like this in our app to cause leaks.
-//
