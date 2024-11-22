@@ -45,8 +45,11 @@ struct EmojiMemoGameView: View {
                 // Since we have removed the 'id: \.self,' we now need the 'MemoGame<String>.Card' to conform to 'Identifiable'
                 Cardview(card)
                 // passing the card instead of the index here
-                    .aspectRatio(10/16, contentMode: .fit)
+                    .aspectRatio(9/17, contentMode: .fit)
                     .padding(5)
+                    .onTapGesture {
+                        viewModel.choose(card)
+                    }
             }
             .foregroundColor(.orange)
         }

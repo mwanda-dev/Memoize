@@ -26,13 +26,27 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
         }
     }
     
-    func choose(_ card: Card) {
-        
+   mutating func choose(_ card: Card) {
+       print("Chosen card: \(card)")
+       // The card var is a value type, not a reference, so directly flipping the card doesn't work
+       let chosenIndex = index(of: card)
+       cards[chosenIndex].isFaceUp.toggle()
     }
     
     mutating func shuffle() {
         cards.shuffle()
         print(cards)
+    }
+    
+    func index(of card: Card) -> Int {
+        for index in cards.indices {
+            if cards[index].id == card.id {
+                return index
+            }
+        }
+        
+        return 0 // FIXME: Bogus!!!
+        
     }
     
     // Just saying struct Card: Equatable doesn't mean that it will just become Equatable
