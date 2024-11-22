@@ -28,8 +28,7 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
     
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get {
-            let faceUpCardIndices = cards.indices.filter { index in cards[index].isFaceUp }
-            return faceUpCardIndices.count == 1 ? faceUpCardIndices.first : nil
+            return faceUpCardIndices = cards.indices.filter { index in cards[index].isFaceUp }.only
         }
         
         set {
@@ -104,5 +103,14 @@ for pairIndex in 0..<max(2, numberOfPairsOfCards) {
         var debugDescription: String {
             "\(id): \(content) \(isFaceUp ? "up" : "down")\(isMatched ? " matched" : "")"
         }
+    }
+}
+
+// This is called an Extension:
+// We're extending the functionality of the Array type
+
+extension Array {
+    var only: Element? {
+        count == 1 ? first : nil
     }
 }
